@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useAppContext} from '../store/Store';
 import { Layout } from '../components/Layout';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateBook = () => {
     const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ export const CreateBook = () => {
     const [review, setReview] = useState("");
 
     const {createItem} = useAppContext();
-
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -60,6 +61,7 @@ export const CreateBook = () => {
             review,
         }
         createItem(newBook);
+        navigate("/");
     }
 
     return (
