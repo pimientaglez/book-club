@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useAppContext} from '../store/Store';
 
 export const CreateBook = () => {
     const [title, setTitle] = useState("");
@@ -7,6 +8,8 @@ export const CreateBook = () => {
     const [intro, setIntro] = useState("");
     const [completed, setCompleted] = useState(false);
     const [review, setReview] = useState("");
+
+    const {createItem} = useAppContext();
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -55,8 +58,7 @@ export const CreateBook = () => {
             completed,
             review,
         }
-
-        //TODO: create book
+        createItem(newBook);
     }
 
     return (
