@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import {useAppContext} from '../store/Store';
 import { Layout } from '../components/Layout';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 
 export const CreateBook = () => {
     const [title, setTitle] = useState("");
@@ -66,65 +69,68 @@ export const CreateBook = () => {
 
     return (
     <Layout>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <div>Title</div>
-                <input 
-                    type="text" 
-                    name="title" 
-                    onChange={handleChange} 
-                    value={title}
-                />
-            </div>
-            <div>
-                <div>Author</div>
-                <input 
-                    type="text" 
-                    name="author" 
-                    onChange={handleChange} 
-                    value={author}
-                />
-            </div>
-            <div>
-                <div>Cover</div>
-                <input 
-                    type="file" 
-                    name="cover" 
-                    onChange={handleChangeFile} 
-                />
-                <div>{!!cover ? <img src={cover} width="200px" alt="preview"/> : ""}</div>
-            </div>
-            <div>
-                <div>Intro</div>
-                <input 
-                    type="text" 
-                    name="intro" 
-                    onChange={handleChange} 
-                    value={intro}
-                />
-            </div>
-            <div>
-                <div>Completed</div>
-                <input 
-                    type="checkbox" 
-                    name="completed" 
-                    onChange={handleChange} 
-                    value={completed}
-                />
-            </div>
-            <div>
-                <div>Review</div>
-                <input 
-                    type="text" 
-                    name="review" 
-                    onChange={handleChange} 
-                    value={review}
-                />
-            </div>
-            <div>
-                <input type="submit" value="Register Book" />
-            </div>
-        </form>
+        <Container style={{width:'50%', marginTop:'30px'}} >
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        name="title" 
+                        onChange={handleChange} 
+                        value={title} 
+                        placeholder="Enter book title" 
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Author</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        name="author" 
+                        onChange={handleChange} 
+                        value={author}
+                        placeholder="Enter book author" 
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>File</Form.Label>
+                    <Form.Control 
+                        type="file" 
+                        name="cover" 
+                        onChange={handleChangeFile}  
+                    />
+                    <div>{!!cover ? <img src={cover} width="200px" alt="preview"/> : ""}</div>
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Intro</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        name="intro" 
+                        onChange={handleChange} 
+                        value={intro} 
+                        placeholder="Enter book intro" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check 
+                        type="checkbox" 
+                        name="completed" 
+                        onChange={handleChange} 
+                        value={completed}
+                        label="Check completed" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Review</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        name="review" 
+                        onChange={handleChange} 
+                        value={review}
+                        placeholder="Enter book review" />
+                </Form.Group>
+                <Button variant="primary" type="submit" value="Register Book">
+                    Submit
+                </Button>
+            </Form>
+        </Container>
     </Layout>
   )
 }
