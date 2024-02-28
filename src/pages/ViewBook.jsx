@@ -25,11 +25,11 @@ export const ViewBook = () => {
                 {book?.cover? <img src={book.cover} width="400" alt={book.title}/> : '' }
             </div>
             <div className="ms-4">
-                <h2>{book?.title}</h2>
-                <div><span className="fs-5">Author: </span><span>{book?.author}</span></div>
-                <div>{book?.intro}</div>
-                <div>{book?.completed ? <div><FcCheckmark/> Completed</div>: <div><TbProgress/> Completed</div>}</div>
-                <div><span className="fs-5">Review: </span><span>{book?.review}</span></div>
+                <h2 className="text-white">{book?.title}</h2>
+                <div><span className="fs-5 text-white">Author: </span><span className="text-white">{book?.author}</span></div>
+                <div className="text-white">{book?.intro}</div>
+                <div>{book?.completed ? <div className="text-white"><FcCheckmark/> Completed</div>: <div className="text-white"><TbProgress/> Reading...</div>}</div>
+                <div><span className="fs-5 text-white">Review: </span><span className="text-white">{book?.review}</span></div>
             </div>
 
         </Container>

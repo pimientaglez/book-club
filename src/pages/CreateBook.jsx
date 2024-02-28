@@ -78,7 +78,7 @@ export const CreateBook = () => {
         <Container style={style} >
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Title</Form.Label>
+                    <Form.Label className="text-white">Title</Form.Label>
                     <Form.Control 
                         type="text" 
                         name="title" 
@@ -88,7 +88,7 @@ export const CreateBook = () => {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Author</Form.Label>
+                    <Form.Label className="text-white">Author</Form.Label>
                     <Form.Control 
                         type="text" 
                         name="author" 
@@ -98,7 +98,7 @@ export const CreateBook = () => {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" >
-                    <Form.Label>File</Form.Label>
+                    <Form.Label className="text-white">File</Form.Label>
                     <Form.Control 
                         type="file" 
                         name="cover" 
@@ -107,7 +107,7 @@ export const CreateBook = () => {
                     <div>{!!cover ? <img src={cover} width="200px" alt="preview"/> : ""}</div>
                 </Form.Group>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Intro</Form.Label>
+                    <Form.Label className="text-white">Intro</Form.Label>
                     <Form.Control 
                         type="text" 
                         name="intro" 
@@ -119,12 +119,13 @@ export const CreateBook = () => {
                     <Form.Check 
                         type="checkbox" 
                         name="completed" 
+                        className="text-white"
                         onChange={handleChange} 
                         value={completed}
                         label="Check completed" />
                 </Form.Group>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Review</Form.Label>
+                    <Form.Label className="text-white">Review</Form.Label>
                     <Form.Control 
                         type="text" 
                         name="review" 
