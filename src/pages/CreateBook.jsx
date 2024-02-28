@@ -69,7 +69,7 @@ export const CreateBook = () => {
 
     return (
     <Layout>
-        <Container style={{width:'50%', marginTop:'30px'}} >
+        <Container style={{width:'50%', marginTop:'3em', marginBottom:'3em'}} >
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Title</Form.Label>
