@@ -7,7 +7,7 @@ import { FaRegBookmark } from "react-icons/fa6";
 
 export const NavigationBar = () => {
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="lg" className="bg-body-tertiary">
+    <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary">
     <Container>
       <FaRegBookmark />{''}
       <Navbar.Brand>Book-App</Navbar.Brand>

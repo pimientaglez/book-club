@@ -6,9 +6,18 @@ import Container from 'react-bootstrap/Container';
 
 export const HomePage = () => {
     const {items} = useAppContext();
+    const style = {
+        width:'70%',
+        marginTop:'3em',
+        marginBottom:'3em', 
+        display:'grid', 
+        gridTemplateColumns:'repeat(4,1fr)', 
+        gridColumnGap: '2em', 
+        gridRowGap: '2em',
+    }
   return (
     <Layout>
-        <Container style={{width:'70%', marginTop:'3em', marginBottom:'3em', display:'grid', gridTemplateColumns:'repeat(4,1fr)', gridColumnGap: '2em', gridRowGap: '2em' }}>
+        <Container style={style} className='dark'>
             {items.map(item => <Book key={item.id} item={item}/> )}
         </Container>
     </Layout>
