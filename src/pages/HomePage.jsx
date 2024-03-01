@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../store/Store'
 import { Layout } from '../components/Layout';
 import { Book } from '../components/Book';
 import Container from 'react-bootstrap/Container';
 
 export const HomePage = () => {
-    const {items} = useAppContext();
+  const {items, fetchHpBooks, hpBooks} = useAppContext();
+
+
+
+  useEffect(() => {
+    fetchHpBooks();
+  }, []);
+
     const style = {
         width:'70%',
         marginTop:'3em',
@@ -18,7 +25,8 @@ export const HomePage = () => {
   return (
     <Layout>
         <Container style={style} className='dark'>
-            {items.map(item => <Book key={item.id} item={item}/> )}
+            {items.length > 0 && items.map(item => <Book key={item.id} item={item}/> )}
+            {hpBooks && hpBooks.map(item => <Book key={item.id} item={item}/> )}
         </Container>
     </Layout>
   )
