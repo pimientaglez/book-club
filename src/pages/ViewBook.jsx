@@ -14,7 +14,7 @@ export const ViewBook = () => {
     
     useEffect(() => {
         setBook(getItem(params.id));
-    }, []);
+    }, [getItem, params.id]);
     if (!book) {
         return <div>Item not found</div>
     }

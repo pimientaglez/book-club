@@ -7,15 +7,15 @@ import { FaRegBookmark } from "react-icons/fa6";
 
 export const NavigationBar = () => {
   return (
-    <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary">
+    <Navbar bg="light" data-bs-theme="light" expand="lg" className="bg-body-tertiary pt-3 pb-3">
     <Container>
       <FaRegBookmark />{''}
       <Navbar.Brand>Book-App</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="#home"><Link to="/" className="nav-link">Home</Link></Nav.Link>
-          <Nav.Link href="#link"><Link to="/create" className="nav-link">Create</Link></Nav.Link>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/create" className="nav-link">Create</Link>
         </Nav>
       </Navbar.Collapse>
     </Container>
