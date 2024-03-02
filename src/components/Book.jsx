@@ -31,7 +31,7 @@ export const Book = ({item}) => {
           }
           <Card.Body>
               <Card.Title className="card-title">
-                {truncateText(item.title, 50)}
+                {truncateText(item.title, 40)}
               </Card.Title>
               <Card.Text className="card-description">
                   {truncateText(item.intro, 100)}
