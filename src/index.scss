@@ -34,8 +34,10 @@ code {
   max-height: 100px;
 }
 .modal-book {
-  background-color: var(--bs-gray-dark);
   min-width: 1000px;
+  .modal-content {
+    background-color: var(--bs-gray-dark) !important;
+  }
 }
 
 .modal-book-container {
