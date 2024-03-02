@@ -13,6 +13,7 @@ export const Book = ({item}) => {
                 variant="top"
                 src={item.cover} 
                 alt={item.title}
+                className="cover-book"
             />
           ) : (
             <Card.Img 
