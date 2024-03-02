@@ -38,7 +38,7 @@ export const NavigationBar = () => {
           <Link to="/create" className="nav-link">Create</Link>
         </Nav>
       </Navbar.Collapse>
-      <Form inline onSubmit={(e)=>{handleSubmit(e)}}>
+      <Form onSubmit={(e)=>{handleSubmit(e)}}>
         <Row>
           <Col xs="auto">
             <Form.Control
