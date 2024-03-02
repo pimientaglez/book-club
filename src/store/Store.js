@@ -14,7 +14,7 @@ const AppContext = createContext({
 
 export default function Store ({children}) {
     const [items, setItems] = useState([]);
-    const [hpBooks, setHpBooks] = useState([]);
+    const [searchedBooks, setSearchedBooks] = useState([]);
 
     const createItem = (item) => {
         const temp = [...items, item];
@@ -31,12 +31,12 @@ export default function Store ({children}) {
         setItems(temp);
     }
 
-    const fetchHpBooks = async() => {
+    const fetchBooks = async(query='') => {
         try {
-            const response = await axios.get(`${BASE_API_URL}?q=harry+potter&key?${API_KEY}`);
+            const response = await axios.get(`${BASE_API_URL}?q=${query}&key?${API_KEY}`);
             console.log(response.data);
             const parsedBooks = response.data.items.map(book => convertBook(book) )
-            setHpBooks(parsedBooks);
+            setSearchedBooks(parsedBooks);
           } catch (error) {
             console.error("There has been an error: "+error);
           }
@@ -46,11 +46,11 @@ export default function Store ({children}) {
         <AppContext.Provider 
             value={{
                 items,
-                hpBooks,
+                searchedBooks,
                 createItem,
                 getItem,
                 updateItem,
-                fetchHpBooks,
+                fetchBooks,
             }}
         >
             {children}
