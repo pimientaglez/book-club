@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { useAppContext } from '../store/Store';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { toast, ToastContainer } from 'react-toastify';
 
 export const EditBook = () => {
     const { getBookByIdFromFirebase,updateBookByIdFromFirebase, fireBook } = useAppContext();
@@ -42,14 +42,19 @@ export const EditBook = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const updatedBook = {...book, id: params.id}
         updateBookByIdFromFirebase(updatedBook);
-        navigate('/lists')
+        toast.success(`Book ${book.title} updated successfully`, {
+            position: 'top-right'
+        })
+        setTimeout(() => {
+            navigate('/lists')
+        }, 3500);
     }
 
     return (
     <Layout>
+        <ToastContainer/>
         {
         <Container style={style} >
             <Form onSubmit={handleSubmit}>
