@@ -4,11 +4,19 @@ import Card from 'react-bootstrap/Card';
 import coverNotFound from '../img/cover-not-found.png';
 import { truncateText } from '../helpers/helper';
 import { BookModal } from './BookModal';
+import { useAppContext } from '../store/Store';
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { Link } from 'react-router-dom'
 
 export const Book = ({item}) => {
   const [showBook, setShowBook] = useState(false);
+  const { deleteBookFromFirebase } = useAppContext();
   const handleShowBook = (option) => {
     setShowBook(option);
+  }
+  const handleDeleteBook = (option) => {
+    deleteBookFromFirebase(item.id);
   }
   return (
     <>
@@ -37,6 +45,8 @@ export const Book = ({item}) => {
                   {truncateText(item.intro, 100)}
               </Card.Text>
               <Button variant="primary" onClick={handleShowBook}>See book</Button>
+              <Button variant="secondary"><Link to={`/edit/${item.id}`}><MdEdit />Edit book</Link></Button>
+              <Button variant="danger" onClick={handleDeleteBook}><MdDelete />Delete book</Button>
           </Card.Body>
       </Card>
       <BookModal book={item} show={showBook} handleShowBook={handleShowBook}/>

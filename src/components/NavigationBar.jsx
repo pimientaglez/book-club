@@ -36,6 +36,7 @@ export const NavigationBar = () => {
         <Nav className="me-auto">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/create" className="nav-link">Create</Link>
+          <Link to="/lists" className="nav-link">Lists</Link>
         </Nav>
       </Navbar.Collapse>
       <Form onSubmit={(e)=>{handleSubmit(e)}}>

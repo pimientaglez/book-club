@@ -3,7 +3,7 @@ import axios from 'axios';
 import { convertBook } from "../helpers/helper";
 
 import Container from 'react-bootstrap/Container';
-import { collection, getDocs, getDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, deleteDoc, doc, createDoc, updateDoc } from 'firebase/firestore';
 import { db } from "../firebaseConfig/firebase";
 
 const API_KEY = "AIzaSyDMh7aOmz95oiqtNMvfnXtIJi1jLa-8gnE";
@@ -18,6 +18,7 @@ const AppContext = createContext({
 
 export default function Store ({children}) {
     const [fireBooks, setFireBooks] = useState([]);
+    const [fireBook, setFireBook] = useState({});
     const [items, setItems] = useState([]);
     const [searchedBooks, setSearchedBooks] = useState([]);
 
@@ -26,11 +27,28 @@ export default function Store ({children}) {
 
     const getBooksFromFirebase = async() => {
         const data = await getDocs(booksCollection);
+        if (data.docs.lenght === 0) return;
         setFireBooks(
             data.docs.map(doc => (
                 {...doc.data(), id:doc.id}
             ))
         );
+    }
+    const getBookByIdFromFirebase = async(id) => {
+        const bookRef = await doc(db, 'books', id);
+        const bookRes = await getDoc(bookRef);
+        if (bookRes.exists()) {
+            setFireBook(bookRes.data());
+        }
+    }
+    const updateBookByIdFromFirebase = async(book) => {
+        const docRef = doc(db, 'books', book.id);
+        await updateDoc(docRef, {...book});
+    }
+    const deleteBookFromFirebase = async(id) => {
+        const bookDoc = await doc(db, 'books', id);
+        await deleteDoc(bookDoc);
+        getBooksFromFirebase();
     }
 
     const createItem = (item) => {
@@ -69,7 +87,11 @@ export default function Store ({children}) {
                 updateItem,
                 fetchBooks,
                 getBooksFromFirebase,
+                getBookByIdFromFirebase,
+                updateBookByIdFromFirebase,
+                deleteBookFromFirebase,
                 fireBooks,
+                fireBook,
             }}
         >
             {children}
