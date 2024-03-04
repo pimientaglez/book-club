@@ -8,6 +8,8 @@ import { useAppContext } from '../store/Store';
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { Link } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
+
 
 export const Book = ({item}) => {
   const [showBook, setShowBook] = useState(false);
@@ -17,6 +19,9 @@ export const Book = ({item}) => {
   }
   const handleDeleteBook = (option) => {
     deleteBookFromFirebase(item.id);
+    toast.success(`Book: ${item.title} successfully deleted`, {
+      position: "top-center"
+    });
   }
   return (
     <>
@@ -48,6 +53,7 @@ export const Book = ({item}) => {
               <Button variant="secondary"><Link to={`/edit/${item.id}`}><MdEdit />Edit book</Link></Button>
               <Button variant="danger" onClick={handleDeleteBook}><MdDelete />Delete book</Button>
           </Card.Body>
+          <ToastContainer />
       </Card>
       <BookModal book={item} show={showBook} handleShowBook={handleShowBook}/>
     </>
