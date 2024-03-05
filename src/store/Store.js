@@ -3,7 +3,7 @@ import axios from 'axios';
 import { convertBook } from "../helpers/helper";
 
 import Container from 'react-bootstrap/Container';
-import { collection, getDocs, getDoc, deleteDoc, doc, createDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, deleteDoc, doc, addDoc, updateDoc } from 'firebase/firestore';
 import { db } from "../firebaseConfig/firebase";
 
 const API_KEY = "AIzaSyDMh7aOmz95oiqtNMvfnXtIJi1jLa-8gnE";
@@ -24,6 +24,15 @@ export default function Store ({children}) {
 
     //get boks from firebase
     const booksCollection = collection(db, 'books');
+
+    const createBookFromFireBase = async (book) => {
+        try{
+            const docRef = await addDoc(collection(db, "books"), {...book});
+        } catch(error) {
+            console.error('Error creating book: ', error);
+        }
+
+    }
 
     const getBooksFromFirebase = async() => {
         const data = await getDocs(booksCollection);
@@ -86,6 +95,7 @@ export default function Store ({children}) {
                 getItem,
                 updateItem,
                 fetchBooks,
+                createBookFromFireBase,
                 getBooksFromFirebase,
                 getBookByIdFromFirebase,
                 updateBookByIdFromFirebase,

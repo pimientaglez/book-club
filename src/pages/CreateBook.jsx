@@ -5,40 +5,24 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const CreateBook = () => {
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [cover, setCover] = useState("");
-    const [intro, setIntro] = useState("");
-    const [completed, setCompleted] = useState(false);
-    const [review, setReview] = useState("");
+    const [book, setBook] = useState({});
 
-    const {createItem} = useAppContext();
+    const {createBookFromFireBase} = useAppContext();
     const navigate = useNavigate();
+
     const handleChange = (e) => {
         const name = e.target.name;
-        const value = e.target.value;
-
-        switch (name) {
-            case "title": 
-                setTitle(value);
-                break;
-            case "author": 
-                setAuthor(value);
-                break;
-            case "intro": 
-                setIntro(value);
-                break;
-            case "completed": 
-                setCompleted(e.target.checked);
-                break;
-            case "review": 
-                setReview(value);
-                break;
-            default:
+        let value = e.target.value;
+        if (name === 'completed') {
+            value = e.target.checked;
         }
+
+        setBook({...book, [name]: value})
     }
+
     const handleChangeFile = (e) => {
         const element = e.target;
         const file = element.files[0];
@@ -47,7 +31,7 @@ export const CreateBook = () => {
         reader.readAsDataURL(file);
 
         reader.onloadend = () => {
-            setCover(reader.result.toString());
+            setBook({...book, 'cover': reader.result.toString()})
         }
     }
 
@@ -56,15 +40,21 @@ export const CreateBook = () => {
 
         const newBook = {
             id: crypto.randomUUID(),
-            title,
-            author,
-            cover,
-            intro,
-            completed,
-            review,
+            ...book
         }
-        createItem(newBook);
-        navigate("/");
+        try {
+            createBookFromFireBase(newBook);
+            toast.success(`Book ${newBook.title} created successfully`, {
+                position: 'top-right'
+            });
+        } catch (error) {
+            toast.error(`Book ${newBook.title} created successfully`, {
+                position: 'top-right'
+            });
+        }
+        setTimeout(() => {
+            navigate("/");
+        }, 3500);
     }
 
     const style = {
@@ -83,7 +73,7 @@ export const CreateBook = () => {
                         type="text" 
                         name="title" 
                         onChange={handleChange} 
-                        value={title} 
+                        value={book.title} 
                         placeholder="Enter book title" 
                     />
                 </Form.Group>
@@ -93,7 +83,7 @@ export const CreateBook = () => {
                         type="text" 
                         name="author" 
                         onChange={handleChange} 
-                        value={author}
+                        value={book.author}
                         placeholder="Enter book author" 
                     />
                 </Form.Group>
@@ -104,7 +94,7 @@ export const CreateBook = () => {
                         name="cover" 
                         onChange={handleChangeFile}  
                     />
-                    <div>{!!cover ? <img src={cover} width="200px" alt="preview"/> : ""}</div>
+                    <div>{!!book.cover ? <img src={book.cover} width="200px" alt="preview"/> : ""}</div>
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label className="text-white">Intro</Form.Label>
@@ -112,7 +102,7 @@ export const CreateBook = () => {
                         type="text" 
                         name="intro" 
                         onChange={handleChange} 
-                        value={intro} 
+                        value={book.intro} 
                         placeholder="Enter book intro" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -121,7 +111,7 @@ export const CreateBook = () => {
                         name="completed" 
                         className="text-white"
                         onChange={handleChange} 
-                        value={completed}
+                        value={book.completed}
                         label="Check completed" />
                 </Form.Group>
                 <Form.Group className="mb-3" >
@@ -130,13 +120,14 @@ export const CreateBook = () => {
                         type="text" 
                         name="review" 
                         onChange={handleChange} 
-                        value={review}
+                        value={book.review}
                         placeholder="Enter book review" />
                 </Form.Group>
                 <Button variant="primary" type="submit" value="Register Book">
                     Submit
                 </Button>
             </Form>
+            <ToastContainer />
         </Container>
     </Layout>
   )
