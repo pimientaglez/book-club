@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 import coverNotFound from '../img/cover-not-found.png';
 import { truncateText } from '../helpers/helper';
 import { BookModal } from './BookModal';
@@ -25,36 +25,46 @@ export const Book = ({item}) => {
   }
   return (
     <>
-      <Card style={{ width: '18rem' }}>
+      <ListGroup.Item
+        as="li"
+        className="d-flex justify-content-between align-items-start"
+      >
+        <div className='ms-2'>
           {
-            item.cover? (
-              <Card.Img 
-                  variant="top"
-                  src={item.cover} 
-                  alt={item.title}
-                  className="card-cover"
-              />
-            ) : (
-              <Card.Img 
-                  variant="top"
-                  src={coverNotFound}
-                  alt="cover not found"
-              />
-            )
+            item.cover ? (
+              <img 
+                src={item.cover} 
+                alt={item.title} 
+                style={{cursor:'pointer'}}
+                width="70" 
+                height="100" 
+                onClick={handleShowBook}/>
+              ) : (
+                <img 
+                  src={coverNotFound} 
+                  alt="cover not found" 
+                  style={{cursor:'pointer'}}
+                  width="70" 
+                  height="100" 
+                  onClick={handleShowBook}/>
+              )
           }
-          <Card.Body>
-              <Card.Title className="card-title">
-                {truncateText(item.title, 40)}
-              </Card.Title>
-              <Card.Text className="card-description">
-                  {truncateText(item.intro, 100)}
-              </Card.Text>
-              <Button variant="primary" onClick={handleShowBook}>See book</Button>
-              <Button variant="secondary"><Link to={`/edit/${item.id}`} className="nav-link"><MdEdit />Edit book</Link></Button>
-              <Button variant="danger" onClick={handleDeleteBook}><MdDelete />Delete book</Button>
-          </Card.Body>
-          <ToastContainer />
-      </Card>
+        </div>
+        <div className="ms-2 me-auto">
+          <div className="fw-bold">{truncateText(item.title, 40)}</div>
+          <div>
+            {item.author}
+          </div>
+          <div>
+          {truncateText(item.intro, 200)}
+          </div>
+        </div>
+        <div className="ms-2 d-flex justify-content-around align-items-center min-vh-10">
+          <Button variant="secondary"><Link to={`/edit/${item.id}`} className="nav-link"><MdEdit /></Link></Button>
+          <Button variant="danger" onClick={handleDeleteBook}><MdDelete /></Button>
+        </div>
+        <ToastContainer />
+      </ListGroup.Item>
       <BookModal book={item} show={showBook} handleShowBook={handleShowBook}/>
     </>
   )
