@@ -21,8 +21,8 @@ export const HomePage = () => {
     <Layout>
         <Container style={style} className='dark className="d-flex justify-content-between align-items-start"'>
             <ListGroup as="ol" numbered>
-              {searchedBooks && searchedBooks.map(item => <Book key={item.id} item={item}/> )}
-              {fireBooks && fireBooks.map(item => <Book key={item.id} item={item}/> )}
+              {searchedBooks && searchedBooks.map(item => <Book key={item.id} item={item} type="search"/> )}
+              {fireBooks && fireBooks.map(item => <Book key={item.id} item={item} type="fire"/> )}
             </ListGroup>
         </Container>
     </Layout>

@@ -7,11 +7,12 @@ import { BookModal } from './BookModal';
 import { useAppContext } from '../store/Store';
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 import { Link } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 
 
-export const Book = ({item}) => {
+export const Book = ({item, type}) => {
   const [showBook, setShowBook] = useState(false);
   const { deleteBookFromFirebase } = useAppContext();
   const handleShowBook = (option) => {
@@ -60,8 +61,16 @@ export const Book = ({item}) => {
           </div>
         </div>
         <div className="ms-2 d-flex justify-content-around align-items-center min-vh-10">
-          <Button variant="secondary"><Link to={`/edit/${item.id}`} className="nav-link"><MdEdit /></Link></Button>
-          <Button variant="danger" onClick={handleDeleteBook}><MdDelete /></Button>
+        {
+          type === 'fire' ? (
+            <>
+              <Button variant="secondary"><Link to={`/edit/${item.id}`} className="nav-link"><MdEdit /></Link></Button>
+              <Button variant="danger" onClick={handleDeleteBook}><MdDelete /></Button>
+            </>
+          ):(
+            <Button variant="primary"><MdAdd /></Button>
+          )
+        }
         </div>
         <ToastContainer />
       </ListGroup.Item>
