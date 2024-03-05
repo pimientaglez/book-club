@@ -26,7 +26,10 @@ export const EditBook = () => {
     }
     const handleChange = (e) => {
         const name = e.target.name;
-        const value = e.target.value;
+        let value = e.target.value;
+        if (name === 'completed') {
+            value = e.target.checked;
+        }
         setBook({...book, [name]: value})
     }
     const handleChangeFile = (e) => {
@@ -49,7 +52,7 @@ export const EditBook = () => {
         });
         setTimeout(() => {
             navigate('/lists')
-        }, 3500);
+        }, 2000);
     }
 
     return (
@@ -102,7 +105,7 @@ export const EditBook = () => {
                         name="completed" 
                         className="text-white"
                         onChange={handleChange}
-                        value={book.completed}
+                        checked={book.completed}
                         label="Check completed" />
                 </Form.Group>
                 <Form.Group className="mb-3" >
