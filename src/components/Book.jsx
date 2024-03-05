@@ -50,7 +50,7 @@ export const Book = ({item}) => {
                   {truncateText(item.intro, 100)}
               </Card.Text>
               <Button variant="primary" onClick={handleShowBook}>See book</Button>
-              <Button variant="secondary"><Link to={`/edit/${item.id}`}><MdEdit />Edit book</Link></Button>
+              <Button variant="secondary"><Link to={`/edit/${item.id}`} className="nav-link"><MdEdit />Edit book</Link></Button>
               <Button variant="danger" onClick={handleDeleteBook}><MdDelete />Delete book</Button>
           </Card.Body>
           <ToastContainer />

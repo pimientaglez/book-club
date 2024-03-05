@@ -46,7 +46,7 @@ export const EditBook = () => {
         updateBookByIdFromFirebase(updatedBook);
         toast.success(`Book ${book.title} updated successfully`, {
             position: 'top-right'
-        })
+        });
         setTimeout(() => {
             navigate('/lists')
         }, 3500);
