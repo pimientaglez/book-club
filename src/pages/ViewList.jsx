@@ -24,7 +24,7 @@ export const ViewList = () => {
   return (
     <Layout>
         <Container style={style} className='dark'>
-            {fireBooks && fireBooks.map(item => <Book key={item.id} item={item}/> )}
+          <></>
         </Container>
     </Layout>
   )
