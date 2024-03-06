@@ -68,7 +68,7 @@ export const Book = ({item, type}) => {
               <Button variant="danger" onClick={handleDeleteBook}><MdDelete /></Button>
             </>
           ):(
-            <Button variant="primary"><MdAdd /></Button>
+            <Button variant="primary"><Link to={`/createfromsearch/${item.id}`} className="nav-link"><MdAdd /></Link></Button>
           )
         }
         </div>

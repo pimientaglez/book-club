@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useAppContext} from '../store/Store';
 import { Layout } from '../components/Layout';
-import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const CreateBook = () => {
     const [book, setBook] = useState({});
 
-    const {createBookFromFireBase} = useAppContext();
+    const {createBookFromFireBase, searchedBooks} = useAppContext();
     const navigate = useNavigate();
+    const params = useParams();
+
+    useEffect(() => {
+      if (searchedBooks.length > 0) {
+        const book = searchedBooks.filter(item => item.id === params.id);
+        setBook(book[0]);
+      }
+    }, [searchedBooks]);
+    
 
     const handleChange = (e) => {
         const name = e.target.name;

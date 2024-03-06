@@ -13,6 +13,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />}></Route>
             <Route path='/create' element={<CreateBook />}></Route>
+            <Route path='/createfromsearch/:id' element={<CreateBook />}></Route>
             <Route path='/edit/:id' element={<EditBook />}></Route>
             <Route path='/lists' element={<ViewList />}></Route>
             <Route path='/view/:id' element={<ViewBook />}></Route>
