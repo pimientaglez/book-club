@@ -16,8 +16,10 @@ export const EditBook = () => {
 
     useEffect(() => {
         getBookByIdFromFirebase(params.id);
-        setBook(fireBook);
     }, [])
+    useEffect(() => {
+        if (fireBook) setBook(fireBook);
+    }, [fireBook])
     
     const style = {
         width:'50%', 
@@ -51,77 +53,78 @@ export const EditBook = () => {
             position: 'top-right'
         });
         setTimeout(() => {
-            navigate('/lists')
+            navigate('/')
         }, 2000);
     }
 
     return (
     <Layout>
         <ToastContainer/>
-        {
-        <Container style={style} >
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" >
-                    <Form.Label className="text-white">Title</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        name="title" 
-                        onChange={handleChange}
-                        value={book.title} 
-                        placeholder="Enter book title" 
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                    <Form.Label className="text-white">Author</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        name="author" 
-                        onChange={handleChange}
-                        value={book.author}
-                        placeholder="Enter book author" 
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                    <Form.Label className="text-white">File</Form.Label>
-                    <Form.Control 
-                        type="file" 
-                        name="cover" 
-                        onChange={handleChangeFile}
-                    />
-                    <div>{!!book.cover ? <img src={book.cover} width="200px" alt="preview"/> : ""}</div>
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                    <Form.Label className="text-white">Intro</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        name="intro" 
-                        onChange={handleChange}
-                        value={book.intro} 
-                        placeholder="Enter book intro" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check 
-                        type="checkbox" 
-                        name="completed" 
-                        className="text-white"
-                        onChange={handleChange}
-                        checked={book.completed}
-                        label="Check completed" />
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                    <Form.Label className="text-white">Review</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        name="review" 
-                        onChange={handleChange}
-                        value={book.review}
-                        placeholder="Enter book review" />
-                </Form.Group>
-                <Button variant="primary" type="submit" value="Register Book">
-                    Save
-                </Button>
-            </Form>
-        </Container>
+        { fireBook && (
+            <Container style={style} >
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" >
+                        <Form.Label className="text-white">Title</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="title" 
+                            onChange={handleChange}
+                            value={book.title} 
+                            placeholder="Enter book title" 
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" >
+                        <Form.Label className="text-white">Author</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="author" 
+                            onChange={handleChange}
+                            value={book.author}
+                            placeholder="Enter book author" 
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" >
+                        <Form.Label className="text-white">File</Form.Label>
+                        <Form.Control 
+                            type="file" 
+                            name="cover" 
+                            onChange={handleChangeFile}
+                        />
+                        <div>{!!book.cover ? <img src={book.cover} width="200px" alt="preview"/> : ""}</div>
+                    </Form.Group>
+                    <Form.Group className="mb-3" >
+                        <Form.Label className="text-white">Intro</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="intro" 
+                            onChange={handleChange}
+                            value={book.intro} 
+                            placeholder="Enter book intro" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                        <Form.Check 
+                            type="checkbox" 
+                            name="completed" 
+                            className="text-white"
+                            onChange={handleChange}
+                            checked={book.completed}
+                            label="Check completed" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" >
+                        <Form.Label className="text-white">Review</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            name="review" 
+                            onChange={handleChange}
+                            value={book.review}
+                            placeholder="Enter book review" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" value="Register Book">
+                        Save
+                    </Button>
+                </Form>
+            </Container>
+        )
         }
     </Layout>
   )
