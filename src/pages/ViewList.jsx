@@ -3,6 +3,7 @@ import { useAppContext } from '../store/Store'
 import { Layout } from '../components/Layout';
 import { Book } from '../components/Book';
 import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export const ViewList = () => {
   const { getBooksFromFirebase, fireBooks} = useAppContext();
@@ -23,8 +24,10 @@ export const ViewList = () => {
 
   return (
     <Layout>
-        <Container style={style} className='dark'>
-          <></>
+        <Container style={style} className='dark d-flex justify-content-between align-items-start'>
+          <ListGroup as="ol" numbered>
+            {fireBooks && fireBooks.map(item => <Book key={item.id} item={item} type="fire"/> )}
+          </ListGroup>
         </Container>
     </Layout>
   )

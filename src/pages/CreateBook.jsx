@@ -63,7 +63,7 @@ export const CreateBook = () => {
         }
         setTimeout(() => {
             navigate("/");
-        }, 3500);
+        }, 2000);
     }
 
     const style = {
