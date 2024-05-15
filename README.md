@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+## Book Club App
+This is a simple work in project app that allows you to search for books using google's api book and save them in a list.
+The books are saved to a firebase db and can be updated/deleted
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
