@@ -5,7 +5,9 @@ import { convertBook } from "../helpers/helper";
 import { collection, getDocs, getDoc, deleteDoc, doc, addDoc, updateDoc } from 'firebase/firestore';
 import { db } from "../firebaseConfig/firebase";
 
-const API_KEY = "AIzaSyDMh7aOmz95oiqtNMvfnXtIJi1jLa-8gnE";
+import { GOOGLE_BOOKS_API_URL } from '../config';
+
+const API_KEY = GOOGLE_BOOKS_API_URL;
 const BASE_API_URL = "https://www.googleapis.com/books/v1/volumes";
 
 const AppContext = createContext({

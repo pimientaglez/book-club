@@ -2,9 +2,10 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from '@firebase/firestore';
+import { FIREBASE_API_URL } from '../config';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB0Ch55Ec961xeSeUsutYd6VWWam4RijoU",
+  apiKey: FIREBASE_API_URL,
   authDomain: "book-app-654a8.firebaseapp.com",
   projectId: "book-app-654a8",
   storageBucket: "book-app-654a8.appspot.com",
